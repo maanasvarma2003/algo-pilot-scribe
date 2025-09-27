@@ -15,13 +15,19 @@ export default {
     extend: {
       colors: {
         border: "hsl(var(--border))",
+        "border-bright": "hsl(var(--border-bright))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          elevated: "hsl(var(--background-elevated))",
+          glass: "hsl(var(--background-glass))",
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -45,18 +51,40 @@ export default {
         },
         card: {
           DEFAULT: "hsl(var(--card))",
+          elevated: "hsl(var(--card-elevated))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        // Trading specific colors
+        trading: {
+          green: "hsl(var(--trading-green))",
+          "green-bright": "hsl(var(--trading-green-bright))",
+          "green-soft": "hsl(var(--trading-green-soft))",
+          red: "hsl(var(--trading-red))",
+          "red-bright": "hsl(var(--trading-red-bright))",
+          "red-soft": "hsl(var(--trading-red-soft))",
         },
+        // Electric colors for advanced UI
+        electric: {
+          blue: "hsl(var(--electric-blue))",
+          purple: "hsl(var(--electric-purple))",
+          cyan: "hsl(var(--neon-cyan))",
+        },
+        golden: "hsl(var(--golden))",
+        silver: "hsl(var(--silver))",
+      },
+      backgroundImage: {
+        "gradient-primary": "var(--gradient-primary)",
+        "gradient-trading": "var(--gradient-trading)",
+        "gradient-danger": "var(--gradient-danger)",
+        "gradient-glass": "var(--gradient-glass)",
+        "gradient-mesh": "var(--gradient-mesh)",
+      },
+      boxShadow: {
+        "soft": "var(--shadow-soft)",
+        "strong": "var(--shadow-strong)",
+        "glow-primary": "var(--glow-primary)",
+        "glow-trading": "var(--glow-trading)",
+        "glow-danger": "var(--glow-danger)",
       },
       borderRadius: {
         lg: "var(--radius)",
