@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Sphere } from "@react-three/drei";
+import { Points, PointMaterial, Sphere, Text } from "@react-three/drei";
 import * as THREE from "three";
 
 // Trading Chart Particles Component
@@ -44,6 +44,17 @@ function TradingParticles() {
     if (ref.current) {
       ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
       ref.current.rotation.y = state.clock.elapsedTime * 0.05;
+      
+      // Dynamic color shifting
+      const time = state.clock.elapsedTime;
+      const colors = ref.current.geometry.attributes.color.array;
+      for (let i = 0; i < colors.length; i += 3) {
+        const wave = Math.sin(time + i * 0.01);
+        colors[i] += wave * 0.001; // R
+        colors[i + 1] += Math.cos(time + i * 0.02) * 0.001; // G
+        colors[i + 2] += Math.sin(time + i * 0.015) * 0.001; // B
+      }
+      ref.current.geometry.attributes.color.needsUpdate = true;
     }
   });
 
@@ -86,9 +97,14 @@ function TradingCubes() {
     if (cubesRef.current) {
       cubesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
       cubesRef.current.children.forEach((cube, index) => {
-        cube.rotation.x = state.clock.elapsedTime * (0.5 + index * 0.01);
-        cube.rotation.z = state.clock.elapsedTime * (0.3 + index * 0.01);
-        cube.position.y += Math.sin(state.clock.elapsedTime + index) * 0.001;
+        const time = state.clock.elapsedTime;
+        cube.rotation.x = time * (0.5 + index * 0.01);
+        cube.rotation.z = time * (0.3 + index * 0.01);
+        cube.position.y += Math.sin(time + index) * 0.001;
+        
+        // Dynamic scaling based on sine wave
+        const scale = 1 + Math.sin(time + index) * 0.1;
+        cube.scale.set(scale, scale, scale);
       });
     }
   });
@@ -111,7 +127,42 @@ function TradingCubes() {
   );
 }
 
-// Chart Lines Component
+// Floating Trading Symbols Component
+function TradingSymbols() {
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.01;
+      groupRef.current.children.forEach((child, index) => {
+        const time = state.clock.elapsedTime;
+        child.position.y = Math.sin(time + index) * 0.5;
+        child.rotation.z = time + index;
+      });
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {['₹', '$', '€', '₿', 'Ɖ'].map((symbol, index) => (
+        <Text
+          key={symbol}
+          position={[
+            (index - 2) * 3,
+            Math.sin(index) * 2,
+            -5 + index
+          ]}
+          fontSize={0.8}
+          color={index % 2 === 0 ? "#00ff88" : "#4466ff"}
+          anchorX="center"
+          anchorY="middle"
+        >
+          {symbol}
+        </Text>
+      ))}
+    </group>
+  );
+}
 function ChartLines() {
   const linesRef = useRef<THREE.Group>(null);
   
@@ -180,9 +231,10 @@ const Trading3DBackground = () => {
         
         <TradingParticles />
         <TradingCubes />
+        <TradingSymbols />
         <ChartLines />
         
-        {/* Central Glowing Sphere */}
+        {/* Enhanced Central Glowing Sphere with pulsing effect */}
         <Sphere args={[0.5]} position={[0, 0, 0]}>
           <meshStandardMaterial
             color="#4466ff"
@@ -192,6 +244,19 @@ const Trading3DBackground = () => {
             emissiveIntensity={0.5}
           />
         </Sphere>
+        
+        {/* Orbiting smaller spheres */}
+        {[...Array(5)].map((_, i) => (
+          <Sphere key={i} args={[0.1]} position={[Math.cos(i) * 2, Math.sin(i) * 2, 0]}>
+            <meshStandardMaterial
+              color={i % 2 === 0 ? "#00ff88" : "#ff4444"}
+              transparent
+              opacity={0.6}
+              emissive={i % 2 === 0 ? "#00ff88" : "#ff4444"}
+              emissiveIntensity={0.3}
+            />
+          </Sphere>
+        ))}
       </Canvas>
     </div>
   );

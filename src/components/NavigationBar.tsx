@@ -36,23 +36,52 @@ const NavigationBar = ({ activeSection, onNavigate, onShowAuth }: NavigationBarP
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, type: "spring" }}
+        transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
         className="fixed top-0 left-0 right-0 z-40 glass backdrop-blur-xl border-b border-border-bright"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            {/* Enhanced Logo */}
             <motion.div
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center glow-primary">
-                <span className="text-primary-foreground font-bold text-lg">N</span>
-              </div>
-              <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <motion.div 
+                className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center glow-primary relative overflow-hidden"
+                animate={{
+                  boxShadow: [
+                    "0 0 15px rgba(66, 102, 255, 0.5)",
+                    "0 0 25px rgba(66, 102, 255, 0.8)",
+                    "0 0 15px rgba(66, 102, 255, 0.5)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  animate={{ x: [-20, 40] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <span className="text-primary-foreground font-bold text-lg relative z-10">N</span>
+              </motion.div>
+              <motion.span 
+                className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
                 Nubra
-              </span>
+              </motion.span>
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -65,17 +94,43 @@ const NavigationBar = ({ activeSection, onNavigate, onShowAuth }: NavigationBarP
                   <motion.button
                     key={item.id}
                     onClick={() => onNavigate(item.id)}
-                    className={`nav-item flex items-center space-x-2 ${
+                    className={`nav-item flex items-center space-x-2 relative ${
                       isActive ? "nav-item-active" : ""
                     }`}
-                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileHover={{ 
+                      scale: 1.05, 
+                      y: -2,
+                      transition: { duration: 0.2 }
+                    }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Icon className={`w-4 h-4 ${item.color}`} />
+                    <motion.div
+                      animate={isActive ? {
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 10, -10, 0],
+                      } : {}}
+                      transition={{
+                        duration: 2,
+                        repeat: isActive ? Infinity : 0,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <Icon className={`w-4 h-4 ${item.color}`} />
+                    </motion.div>
                     <span className="text-sm font-medium">{item.label}</span>
+                    
+                    {isActive && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary"
+                        layoutId="activeIndicator"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
                   </motion.button>
                 );
               })}

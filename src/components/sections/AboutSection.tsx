@@ -10,7 +10,6 @@ import {
   TrendingUp,
   CheckCircle,
   Star,
-  Heart,
   Target
 } from "lucide-react";
 
@@ -19,7 +18,7 @@ const AboutSection = () => {
     { value: "50K+", label: "Active Traders", icon: Users, color: "text-electric-blue" },
     { value: "₹1000Cr+", label: "Daily Volume", icon: TrendingUp, color: "text-trading-green-bright" },
     { value: "99.9%", label: "Uptime", icon: Shield, color: "text-electric-purple" },
-    { value: "24/7", label: "Support", icon: Heart, color: "text-trading-red-bright" }
+    { value: "24/7", label: "Support", icon: Zap, color: "text-golden" }
   ];
 
   const features = [
@@ -31,26 +30,6 @@ const AboutSection = () => {
     "Institutional-level security"
   ];
 
-  const team = [
-    {
-      name: "Rajesh Kumar",
-      role: "Founder & CEO",
-      background: "Ex-Goldman Sachs, 15+ years in algo trading",
-      image: "👨‍💼"
-    },
-    {
-      name: "Priya Sharma",
-      role: "CTO",
-      background: "Ex-Microsoft, AI/ML specialist",
-      image: "👩‍💻"
-    },
-    {
-      name: "Amit Patel",
-      role: "Head of Trading",
-      background: "Ex-Zerodha, Options trading expert",
-      image: "👨‍💼"
-    }
-  ];
 
   return (
     <div className="py-20 px-4 sm:px-6 lg:px-8">
@@ -172,35 +151,6 @@ const AboutSection = () => {
           </Card>
         </motion.div>
 
-        {/* Team Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl font-semibold text-center mb-8">Meet Our Team</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <Card className="glass-card text-center p-6 hover:glow-primary transition-all duration-300">
-                  <div className="text-6xl mb-4">{member.image}</div>
-                  <h4 className="text-lg font-semibold mb-1">{member.name}</h4>
-                  <p className="text-electric-blue font-medium mb-2">{member.role}</p>
-                  <p className="text-sm text-muted-foreground">{member.background}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Awards & Recognition */}
         <motion.div

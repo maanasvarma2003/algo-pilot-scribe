@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import TradingPlatform from "./pages/TradingPlatform";
 import AuthPage from "./pages/AuthPage";
+import Chatbot from "./components/Chatbot";
 import { useState } from "react";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => {
             )}
           </AnimatePresence>
         </BrowserRouter>
+        <Chatbot />
       </TooltipProvider>
     </QueryClientProvider>
   );

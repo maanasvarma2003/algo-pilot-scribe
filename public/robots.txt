@@ -12,3 +12,20 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://your-domain.vercel.app/sitemap.xml
+
+# Enhanced SEO directives
+Disallow: /private/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+
+# Allow important trading-related pages
+Allow: /markets
+Allow: /strategy
+Allow: /tools
+
+# Crawl delay for better performance
+Crawl-delay: 1
