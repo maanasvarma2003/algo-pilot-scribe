@@ -3,11 +3,18 @@ import { Card } from "@/components/ui/card";
 import LiveIndexChart from "@/components/LiveIndexChart";
 import MarketStats from "@/components/MarketStats";
 import TopStocks from "@/components/TopStocks";
+import MarketVisualization3D from "@/components/backgrounds/MarketVisualization3D";
 
 const MarketOverview = () => {
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <MarketVisualization3D />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/70 to-background/90 z-10" />
+      
+      <div className="container mx-auto relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -131,7 +138,7 @@ const MarketOverview = () => {
           </Card>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

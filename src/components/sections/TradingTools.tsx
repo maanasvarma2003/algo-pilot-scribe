@@ -15,6 +15,7 @@ import {
   DollarSign,
   Activity
 } from "lucide-react";
+import ToolsVisualization3D from "@/components/backgrounds/ToolsVisualization3D";
 
 const TradingTools = () => {
   const tools = [
@@ -59,8 +60,14 @@ const TradingTools = () => {
   ];
 
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background-elevated via-background to-background-elevated">
-      <div className="container mx-auto">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/10 relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <ToolsVisualization3D />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background/87 via-background/67 to-background/87 z-10" />
+      
+      <div className="container mx-auto relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -256,7 +263,7 @@ const TradingTools = () => {
           </Card>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

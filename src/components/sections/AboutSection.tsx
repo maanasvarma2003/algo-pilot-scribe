@@ -12,6 +12,7 @@ import {
   Star,
   Target
 } from "lucide-react";
+import AboutVisualization3D from "@/components/backgrounds/AboutVisualization3D";
 
 const AboutSection = () => {
   const stats = [
@@ -32,8 +33,14 @@ const AboutSection = () => {
 
 
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <AboutVisualization3D />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background/89 via-background/69 to-background/89 z-10" />
+      
+      <div className="container mx-auto relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -220,7 +227,7 @@ const AboutSection = () => {
           </Card>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

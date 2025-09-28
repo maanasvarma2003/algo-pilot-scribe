@@ -8,7 +8,8 @@ import {
   Info,
   LogIn,
   Menu,
-  X
+  X,
+  DollarSign
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -67,7 +68,7 @@ const NavigationBar = ({ activeSection, onNavigate, onShowAuth }: NavigationBarP
                   animate={{ x: [-20, 40] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <span className="text-primary-foreground font-bold text-lg relative z-10">N</span>
+                <DollarSign className="text-primary-foreground font-bold text-lg relative z-10" />
               </motion.div>
               <motion.span 
                 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent"

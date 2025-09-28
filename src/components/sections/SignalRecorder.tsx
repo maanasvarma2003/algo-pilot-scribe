@@ -14,6 +14,7 @@ import {
   Clock,
   CheckCircle
 } from "lucide-react";
+import RecorderVisualization3D from "@/components/backgrounds/RecorderVisualization3D";
 
 const SignalRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -43,8 +44,14 @@ const SignalRecorder = () => {
   };
 
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <RecorderVisualization3D />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background/88 via-background/68 to-background/88 z-10" />
+      
+      <div className="container mx-auto relative z-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -314,7 +321,7 @@ const SignalRecorder = () => {
           </Card>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
