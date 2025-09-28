@@ -171,7 +171,6 @@ function ToolLabels() {
           color={label.color}
           anchorX="center"
           anchorY="middle"
-          font="/fonts/inter-bold.woff"
         >
           {label.text}
         </Text>

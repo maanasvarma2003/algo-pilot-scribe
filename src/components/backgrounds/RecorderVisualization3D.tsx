@@ -41,19 +41,17 @@ function SignalWaves() {
 
   return (
     <group ref={groupRef}>
-      {waves.map((wave, index) => (
-        <line key={index}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={wave.points.length}
-              array={new Float32Array(wave.points.flatMap(p => [p.x, p.y, p.z]))}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial color={wave.color} transparent opacity={0.8} linewidth={3} />
-        </line>
-      ))}
+      {waves.map((wave, index) => {
+        const geometry = new THREE.BufferGeometry();
+        geometry.setFromPoints(wave.points);
+        
+        return (
+          <line key={index}>
+            <primitive object={geometry} attach="geometry" />
+            <lineBasicMaterial color={wave.color} transparent opacity={0.8} />
+          </line>
+        );
+      })}
     </group>
   );
 }
@@ -195,7 +193,6 @@ function RecordingStatusText() {
       color="#ff4466"
       anchorX="center"
       anchorY="middle"
-      font="/fonts/inter-bold.woff"
     >
       ● REC
     </Text>

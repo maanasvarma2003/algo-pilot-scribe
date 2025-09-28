@@ -44,28 +44,14 @@ function DNAHelix() {
     <group ref={helixRef}>
       {/* First DNA strand */}
       <line>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={helixPoints.points1.length}
-            array={new Float32Array(helixPoints.points1.flatMap(p => [p.x, p.y, p.z]))}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#4466ff" transparent opacity={0.8} linewidth={4} />
+        <primitive object={new THREE.BufferGeometry().setFromPoints(helixPoints.points1)} attach="geometry" />
+        <lineBasicMaterial color="#4466ff" transparent opacity={0.8} />
       </line>
       
       {/* Second DNA strand */}
       <line>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={helixPoints.points2.length}
-            array={new Float32Array(helixPoints.points2.flatMap(p => [p.x, p.y, p.z]))}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#00ff88" transparent opacity={0.8} linewidth={4} />
+        <primitive object={new THREE.BufferGeometry().setFromPoints(helixPoints.points2)} attach="geometry" />
+        <lineBasicMaterial color="#00ff88" transparent opacity={0.8} />
       </line>
       
       {/* Connection points */}
@@ -237,7 +223,6 @@ function MissionText() {
           color={value.color}
           anchorX="center"
           anchorY="middle"
-          font="/fonts/inter-bold.woff"
         >
           {value.text}
         </Text>
