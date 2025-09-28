@@ -179,65 +179,65 @@ const HeroSection = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 30, rotateY: -15 }}
-                    animate={{ opacity: 1, y: 0, rotateY: 0 }}
-                    transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-                    whileHover={{ 
-                      y: -10, 
-                      scale: 1.05,
-                      rotateY: 5,
-                      rotateX: 5,
-                      transition: { duration: 0.3 }
-                    }}
-                    className="hover-lift"
-                    style={{ transformStyle: 'preserve-3d' }}
-                  >
-                    <Card className="glass-card text-center p-6 hover:glow-primary transition-all duration-300 relative overflow-hidden group">
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5"
-                        initial={false}
-                        whileHover={{ opacity: 0.05 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                      
-                      <div className="flex justify-center mb-4 relative z-10">
-                        <motion.div 
-                          className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center glow-primary"
-                          animate={{
-                            rotate: [0, 10, -10, 0],
-                            scale: [1, 1.1, 1],
-                          }}
-                          transition={{
-                            duration: 3 + index * 0.5,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                        >
-                          <Icon className={`w-6 h-6 text-primary-foreground`} />
-                        </motion.div>
-                      </div>
-                      
-                      <motion.h3 
-                        className="text-lg font-semibold mb-2 relative z-10"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.2 + index * 0.1 }}
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 30, rotateY: -15 }}
+                  animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                  transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
+                  whileHover={{ 
+                    y: -10, 
+                    scale: 1.05,
+                    rotateY: 5,
+                    rotateX: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="hover-lift"
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <Card className="glass-card text-center p-6 hover:glow-primary transition-all duration-300 relative overflow-hidden group">
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5"
+                      initial={false}
+                      whileHover={{ opacity: 0.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
+                    <div className="flex justify-center mb-4 relative z-10">
+                      <motion.div 
+                        className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center glow-primary"
+                        animate={{
+                          rotate: [0, 10, -10, 0],
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                          duration: 3 + index * 0.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
                       >
-                        {feature.title}
-                      </motion.h3>
-                      
-                      <motion.p 
-                        className="text-muted-foreground relative z-10"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.4 + index * 0.1 }}
-                      >
-                        {feature.description}
-                      </motion.p>
-                    </Card>
-                  </motion.div>
+                        <Icon className="w-6 h-6 text-primary-foreground" />
+                      </motion.div>
+                    </div>
+                    
+                    <motion.h3 
+                      className="text-lg font-semibold mb-2 relative z-10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.2 + index * 0.1 }}
+                    >
+                      {feature.title}
+                    </motion.h3>
+                    
+                    <motion.p 
+                      className="text-muted-foreground relative z-10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.4 + index * 0.1 }}
+                    >
+                      {feature.description}
+                    </motion.p>
+                  </Card>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -247,9 +247,9 @@ const HeroSection = () => {
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
         {/* Floating particles */}
-        {[...Array(12)].map((_, i) => (
+        {Array.from({ length: 12 }, (_, i) => (
           <motion.div
-            key={i}
+            key={`particle-${i}`}
             className={`absolute w-1 h-1 rounded-full ${
               i % 3 === 0 ? 'bg-electric-blue' : 
               i % 3 === 1 ? 'bg-electric-purple' : 'bg-trading-green-bright'
@@ -274,7 +274,7 @@ const HeroSection = () => {
         ))}
 
         {/* Glowing orbs */}
-        {[...Array(6)].map((_, i) => (
+        {Array.from({ length: 6 }, (_, i) => (
           <motion.div
             key={`orb-${i}`}
             className="absolute rounded-full blur-sm"

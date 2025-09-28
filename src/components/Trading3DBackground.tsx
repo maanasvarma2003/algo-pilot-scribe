@@ -246,8 +246,8 @@ const Trading3DBackground = () => {
         </Sphere>
         
         {/* Orbiting smaller spheres */}
-        {[...Array(5)].map((_, i) => (
-          <Sphere key={i} args={[0.1]} position={[Math.cos(i) * 2, Math.sin(i) * 2, 0]}>
+        {Array.from({ length: 5 }, (_, i) => (
+          <Sphere key={`sphere-${i}`} args={[0.1]} position={[Math.cos(i) * 2, Math.sin(i) * 2, 0]}>
             <meshStandardMaterial
               color={i % 2 === 0 ? "#00ff88" : "#ff4444"}
               transparent

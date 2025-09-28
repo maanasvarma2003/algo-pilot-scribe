@@ -120,9 +120,9 @@ const Chatbot = () => {
     >
       <Bot className="w-6 h-6 text-electric-blue" />
       <div className="flex space-x-1">
-        {[0, 1, 2].map((i) => (
+        {Array.from({ length: 3 }, (_, i) => (
           <motion.div
-            key={i}
+            key={`dot-${i}`}
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.5, 1, 0.5],
