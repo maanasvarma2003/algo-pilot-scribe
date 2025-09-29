@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Sphere, Text, Line } from "@react-three/drei";
+import { Points, PointMaterial, Sphere, Text } from "@react-three/drei";
 import * as THREE from "three";
 
 // Stock Price Chart Lines
@@ -17,7 +17,7 @@ function StockChartLines() {
         const x = (j - 10) * 0.8;
         const y = basePrice + (Math.random() - 0.5) * 20 + Math.sin(j * 0.3) * 10;
         const z = (i - 7) * 2;
-        points.push([x, y / 50 - 3, z]);
+        points.push(new THREE.Vector3(x, y / 50 - 3, z));
       }
       
       charts.push({
@@ -39,16 +39,21 @@ function StockChartLines() {
 
   return (
     <group ref={groupRef}>
-      {chartData.map((chart, index) => (
-        <Line
-          key={index}
-          points={chart.points}
-          color={chart.color}
-          lineWidth={2}
-          transparent
-          opacity={0.8}
-        />
-      ))}
+      {chartData.map((chart, index) => {
+        const geometry = new THREE.BufferGeometry();
+        geometry.setFromPoints(chart.points);
+        
+        return (
+          <line key={index}>
+            <primitive object={geometry} attach="geometry" />
+            <lineBasicMaterial 
+              color={chart.color} 
+              transparent 
+              opacity={0.8}
+            />
+          </line>
+        );
+      })}
     </group>
   );
 }
